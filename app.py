@@ -1,5 +1,9 @@
 from flask import Flask, render_template, request, send_file
-import PyPDF2
+from PyPDF2 import PdfReader
+from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import letter
+from io import BytesIO
+
 import io
 
 app = Flask(__name__)
@@ -23,23 +27,73 @@ def upload():
         download_name='edited_pdf.pdf'
     )
 
+@app.route('/upload', methods=['POST'])
 def process_pdf(file):
-    # Perform PDF text editing using PyPDF2
-    pdf_reader = PyPDF2.PdfReader(file)
-    pdf_writer = PyPDF2.PdfWriter()
+    reader = PdfReader(file)
+    output = BytesIO()
 
-    # Modify the PDF text or perform other editing operations
-    # Example: Rotating each page by 90 degrees
-    for page in pdf_reader.pages:
-        page.rotate(90)
-        pdf_writer.add_page(page)
+    # Calculate the available space on each page
+    page_width, page_height = letter
+    margin = 72  # 1 inch margin
+    content_width = page_width - 2 * margin
+    content_height = page_height - 2 * margin
 
-    # Save the edited PDF to a BytesIO object
-    edited_pdf_io = io.BytesIO()
-    pdf_writer.write(edited_pdf_io)
-    edited_pdf_io.seek(0)
+    c = canvas.Canvas(output, pagesize=letter)
+    font_size = 13  # Adjust the font size as desired
+    line_spacing = 12  # Adjust the line spacing as desired
+    word_spacing = 5.2  # Adjust the spacing between words as desired
 
-    return edited_pdf_io
+    for page in reader.pages:
+        content = page.extract_text()
+        words = content.split()
+
+        # Initialize the position for adding words
+        x = margin
+        y = margin + content_height
+
+        for word in words:
+            # Calculate the width of the word including additional spacing
+            word_width = c.stringWidth(word, "Helvetica", font_size) + word_spacing
+
+            # Calculate the remaining space on the current line
+            remaining_space = content_width - (x - margin)
+
+            # Check if the word can fit on the current line
+            if word_width > remaining_space:
+                # Move to the next line if the word doesn't fit
+                x = margin
+                y -= font_size + line_spacing  # Adjust the line spacing based on font size
+
+                # Check if the remaining space on the page can accommodate the word
+                if y - margin < font_size + line_spacing:
+                    # Create a new page if the word doesn't fit on the current page
+                    c.showPage()
+                    y = margin + content_height
+
+            # Split the word into two halves
+            half_length = len(word) // 2
+            first_half = word[:half_length]
+            second_half = word[half_length:]
+
+            # Draw the first half of the word in bold
+            c.setFont("Helvetica-Bold", font_size)
+            c.drawString(x, y, first_half)
+
+            # Calculate the width of the first half
+            first_half_width = c.stringWidth(first_half, "Helvetica-Bold", font_size)
+
+            # Draw the second half of the word normally
+            c.setFont("Helvetica", font_size)
+            c.drawString(x + first_half_width, y, second_half)
+
+            # Move to the next position
+            x += word_width
+
+        c.showPage()  # Show the page after processing all words
+
+    c.save()
+    output.seek(0)
+    return output
 
 if __name__ == '__main__':
     app.run(debug=True)
