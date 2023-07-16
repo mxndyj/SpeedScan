@@ -1,0 +1,23 @@
+  <div class="text-container">
+    <img src="static\ss_mobile_logo_header-transformed.png" alt="logo" class="move-mobile-logo"/>
+    <h2>What is SpeedScan?</h2>
+    <br/>
+    <p>Simply upload your PDF document, and SpeedScan intelligently processes the text, <br/> 
+      applying a unique technique that optimizes reading. This proven 
+      method has been <br/> shown to accelerate reading speed and comprehension, ensuring you can 
+      absorb <br/>information more efficiently.</p>
+  </div>
+
+}
+
+h2 {
+  font-size: 24px; /* Adjust the font size as desired */
+  font-weight: bold;
+}
+
+.text-container {
+  position: relative;
+  margin-top: -650px; /* Move the text 100 pixels up */
+  margin-left: 50px; /* Move the text 50 pixels to the right */
+}
+
