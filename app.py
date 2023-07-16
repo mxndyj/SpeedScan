@@ -4,8 +4,6 @@ from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
 from io import BytesIO
 
-import io
-
 app = Flask(__name__)
 
 @app.route('/')
@@ -41,7 +39,7 @@ def process_pdf(file):
     c = canvas.Canvas(output, pagesize=letter)
     font_size = 13  # Adjust the font size as desired
     line_spacing = 12  # Adjust the line spacing as desired
-    word_spacing = 5.2  # Adjust the spacing between words as desired
+    word_spacing = 5  # Adjust the spacing between words as desired
 
     for page in reader.pages:
         content = page.extract_text()
@@ -60,15 +58,9 @@ def process_pdf(file):
 
             # Check if the word can fit on the current line
             if word_width > remaining_space:
-                # Move to the next line if the word doesn't fit
+                # Move to the next line
                 x = margin
                 y -= font_size + line_spacing  # Adjust the line spacing based on font size
-
-                # Check if the remaining space on the page can accommodate the word
-                if y - margin < font_size + line_spacing:
-                    # Create a new page if the word doesn't fit on the current page
-                    c.showPage()
-                    y = margin + content_height
 
             # Split the word into two halves
             half_length = len(word) // 2
@@ -89,7 +81,13 @@ def process_pdf(file):
             # Move to the next position
             x += word_width
 
-        c.showPage()  # Show the page after processing all words
+        # Check if the remaining space on the page can accommodate the header
+        if y - margin >= font_size + line_spacing:
+            # Reset the position to the top of the page
+            x = margin
+            y -= font_size + line_spacing  # Adjust the line spacing based on font size
+
+        c.showPage()
 
     c.save()
     output.seek(0)

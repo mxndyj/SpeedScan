@@ -1,0 +1,86 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #edeaef !important;
+}
+.header {
+  background-color: #ffffff7f;
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+}
+
+.move-right {
+  position: relative;
+  left:780px;
+  top: 20px
+}
+
+.container {
+  width: 20px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.container-b {
+  background: #fff;
+  box-shadow: 10px 10px 30px rgba(145, 93, 255, 0.5);
+  border-radius: 10px;
+  padding: 31px;
+  width:550px;
+}
+
+.button-move {
+  position: relative;
+  left:137px ;
+  top: 170px;
+}
+
+
+
+.drag-drop-area {
+  border: 2px dashed #ccc;
+  border-radius: 5px;
+  padding: 30px;
+  text-align: center;
+  transition: background-color 0.3s ease;
+  height: 300px;
+  width: 460px;
+}
+
+.drag-drop-area.drag-over {
+  background-color: rgba(145, 93, 255, 0.2);
+}
+
+.drag-drop-text {
+  color: rgb(154, 153, 159); /* Replace #ff0000 with your desired color code */
+}
+
+.img-web{
+  height: 60px;
+  width: 195px;
+  left:13px ;
+  top: 170px;
+
+}
+
+h2 {
+  font-size: 24px; /* Adjust the font size as desired */
+  font-weight: bold;
+}
+
+.text-container {
+  position: relative;
+  margin-top: -350px; /* Move the text 100 pixels up */
+  margin-left: 50px; /* Move the text 50 pixels to the right */
+}
+
+h2 {
+  font-size: 24px; /* Adjust the font size as desired */
+  font-weight: bold;
+}
+
+
