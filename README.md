@@ -8,7 +8,7 @@ method has been shown to accelerate reading speed and comprehension.
 
 
 # Features
-Allows users to upload a pdf on click or drag-and-drop. The program processes the file and outputs a new edited pdf named "speedscanned.pdf" to the user
+Allows users to upload a pdf on click or drag-and-drop. The program processes the file and outputs a new edited pdf named "speedscanned" to the user
 which contains the text from their original inputted pdf but with a reading technique applied.
 # Concept Video
 https://youtu.be/DIqV_ZAlt2c
