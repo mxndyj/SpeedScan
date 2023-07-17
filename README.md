@@ -5,4 +5,10 @@ of words as your main focal points during reading. Instead of fixating on readin
 each word in its entirety, SpeedScan directs your focus to key segments, allowing
 for quicker information absorption and improved reading efficiency. This proven
 method has been shown to accelerate reading speed and comprehension.
+
+
+# Features
+Allow users to upload a pdf on click or drag-and-drop. The program processes the file and outputs a new edited pdf to the user
+which contains the text from their original inputted pdf but with a reading technique applied.
+# Concept Video
 https://youtu.be/DIqV_ZAlt2c
