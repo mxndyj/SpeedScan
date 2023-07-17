@@ -39,7 +39,7 @@ def process_pdf(file):
     c = canvas.Canvas(output, pagesize=letter)
     font_size = 13  # Adjust the font size as desired
     line_spacing = 12  # Adjust the line spacing as desired
-    word_spacing = 5  # Adjust the spacing between words as desired
+    word_spacing = 5.2  # Adjust the spacing between words as desired
 
     for page in reader.pages:
         content = page.extract_text()
@@ -47,7 +47,7 @@ def process_pdf(file):
 
         # Initialize the position for adding words
         x = margin
-        y = margin + content_height
+        y = margin + content_height - font_size  # Start from the top of the content area
 
         for word in words:
             # Calculate the width of the word including additional spacing
@@ -61,6 +61,18 @@ def process_pdf(file):
                 # Move to the next line
                 x = margin
                 y -= font_size + line_spacing  # Adjust the line spacing based on font size
+
+                # Check if the remaining space on the page can accommodate the next line
+                if y < margin:
+                    # Create a new page
+                    c.showPage()
+                    y = margin + content_height - font_size  # Start from the top of the content area
+
+            # Check if the word exceeds the available content height
+            if y - font_size < 0:
+                # Create a new page
+                c.showPage()
+                y = margin + content_height - font_size  # Start from the top of the content area
 
             # Split the word into two halves
             half_length = len(word) // 2
@@ -94,4 +106,4 @@ def process_pdf(file):
     return output
 
 if __name__ == '__main__':
-    app.run(debug=False)
+    app.run(debug=True)

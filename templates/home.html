@@ -4,43 +4,92 @@
     <meta charset="UTF-8" />
     <title>SpeedScan</title>
     <link rel="stylesheet" href="static/css/style.css" />
-    <link rel="icon" href="static/My_project-transformeded.png" sizes="10x10" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+    <link
+      rel="icon"
+      href="static/My_project-transformeded.png"
+      sizes="10x10"
+      type="image/x-icon"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    />
   </head>
   <body>
     <header class="header">
       <div class="header-wrap">
         <div class="logo">
-          <img src="static/ssweblogo_header2.jpg" class="img-web" alt="web-logo" />
+          <img
+            src="static/ssweblogo_header2.jpg"
+            class="img-web"
+            alt="web-logo"
+          />
         </div>
       </div>
     </header>
-    <br/>
-    <br/>
-    <div class="card shadow move-right container-b" style="height: 500px;">
-      <div class="card-body" class="move-card">
+    <br />
+    <br />
+    <div class="card shadow move-right container-b" style="height: 500px">
+      <div class="card-body">
         <h1>SpeedScan your PDF!</h1>
         <form id="uploadForm" enctype="multipart/form-data">
-          <button class="btn btn-primary button-move" type="button" onclick="chooseFile()" style="width: 180px; height: 50px; font-weight: bold; font-size: 18px;">Upload PDF</button>
-          <input class="file-button-input" type="file" id="fileButton" name="pdfFile" accept=".pdf" required style="display: none;" />
+          <button
+            class="btn btn-primary button-move"
+            type="button"
+            onclick="chooseFile()"
+            style="
+              width: 180px;
+              height: 50px;
+              font-weight: bold;
+              font-size: 18px;
+            "
+          >
+            Upload PDF
+          </button>
+          <input
+            class="file-button-input"
+            type="file"
+            id="fileButton"
+            name="pdfFile"
+            accept=".pdf"
+            required
+            style="display: none"
+          />
           <input type="hidden" id="filename" />
-          <div class="drag-drop-area" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event)">
+          <div
+            class="drag-drop-area"
+            onclick="chooseFile()"
+            ondragover="handleDragOver(event)"
+            ondragleave="handleDragLeave(event)"
+            ondrop="handleDrop(event)"
+          >
             <span class="drag-drop-text">Drag and drop your PDF file here</span>
+            <input
+              class="file-button-input"
+              type="file"
+              id="fileButton"
+              name="pdfFile"
+              accept=".pdf"
+              required
+              style="display: none"
+            />
           </div>
         </form>
       </div>
     </div>
     <div class="text-container">
       <h2>What is SpeedScan?</h2>
-      <br/>
-      <p>Simply upload your PDF document, and SpeedScan intelligently processes the text <br/> 
-        by applying an innovative speed reading technique that emphasizes specific parts 
-        <br/>of words as your main focal points during reading. Instead of fixating on 
-        reading <br/>each word in its entirety, SpeedScan directs your focus to key segments, 
-        allowing <br/>for quicker information absorption and improved reading efficiency. This proven <br/>
-        method has been shown to accelerate reading speed and comprehension.</p>
+      <br />
+      <p>
+        Simply upload your PDF document and SpeedScan will process the text by
+        <br />
+        applying an unique technique that optimizes reading. It emphasizes
+        specific <br />parts of words as your main focal points during reading.
+        This proven method<br />
+        has been shown to accelerate reading speed and comprehension.
+      </p>
     </div>
-    
+
     <script>
       function processPdf() {
         var form = document.getElementById("uploadForm");
@@ -61,7 +110,7 @@
             // Create a temporary download link for the edited PDF
             const downloadLink = document.createElement("a");
             downloadLink.href = URL.createObjectURL(blob);
-            downloadLink.download = "edited_pdf.pdf";
+            downloadLink.download = "speedscanned.pdf";
             downloadLink.click();
             // Reset the file input
             document.getElementById("uploadForm").reset();
@@ -78,12 +127,14 @@
       }
 
       // Update the filename when a file is selected
-      document.getElementById("fileButton").addEventListener("change", function (event) {
-        var filename = event.target.files[0].name;
-        document.getElementById("filename").value = filename;
-        // Trigger file processing
-        processPdf();
-      });
+      document
+        .getElementById("fileButton")
+        .addEventListener("change", function (event) {
+          var filename = event.target.files[0].name;
+          document.getElementById("filename").value = filename;
+          // Trigger file processing
+          processPdf();
+        });
 
       function handleDragOver(event) {
         event.preventDefault();
