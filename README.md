@@ -12,5 +12,6 @@ Allows users to upload a pdf on click or drag-and-drop. The program processes th
 which contains the text from their original inputted pdf but with a reading technique applied.
 # Concept Video
 https://youtu.be/DIqV_ZAlt2c
-# Deployed (temporarily disabled)
-https://speedscan-393005.wl.r.appspot.com/
+# Deployed
+[https://speedscan-393005.wl.r.appspot.com/
+](https://speedscan.onrender.com/)
