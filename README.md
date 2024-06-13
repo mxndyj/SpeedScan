@@ -13,5 +13,4 @@ which contains the text from their original inputted pdf but with a reading tech
 # Concept Video
 https://youtu.be/DIqV_ZAlt2c
 # Deployed
-[https://speedscan-393005.wl.r.appspot.com/
-](https://speedscan.onrender.com/)
+[https://speedscan.onrender.com/](https://speedscan.onrender.com/)
