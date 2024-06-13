@@ -20,6 +20,7 @@ Flask==2.3.2
 Flask-Login==0.6.2
 Flask-SQLAlchemy==3.0.5
 greenlet==2.0.2
+gunicorn==20.1.0
 idna==3.4
 ipykernel==6.24.0
 ipython==8.14.0
